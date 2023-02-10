@@ -1,18 +1,17 @@
 <?php
 // apakah tombol submit apakah sudah di tekan atau belum
-
-    if(isset($_POST["submit"])){
+    if ( isset($_POST["submit"]) ) {
+    
 // cek username & password
-        if( $_POST["username"] == "admin" && $_POST["password"] == "123" ) {
+        if ( $_POST["username"] == "admin" && $_POST["password"] == "123" ) {   
 // jika benar maka akan langsung ke redirect ke halaman admin
-            header("Location : admin.php");
+            header("Location: admin.php");
             exit;
-        } else{
+    } else {
 // jika salah maka tampilkan error kesalahan
-            $error = true;
+        $error = true;
         }
-}
-
+    }
 
 ?>
 

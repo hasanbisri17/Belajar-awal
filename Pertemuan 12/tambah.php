@@ -62,6 +62,10 @@ if( isset( $_POST["submit"] ) ) {
                 <input type="text" name="semester" id="semester" require>
             </li>
             <li>
+                <label for="semester">SEMESTER : </label>
+                <input type="text" name="semester" id="semester" require>
+            </li>
+            <li>
                 <button type="submit" name="submit">Tambah Data</button>
             </li>
         </ul>

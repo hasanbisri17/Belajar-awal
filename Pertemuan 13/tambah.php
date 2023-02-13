@@ -3,27 +3,22 @@
 
 require 'functions.php';
 
-// Ambil data dari URL/GET
-$id = $_GET["id"];
-// Query data maha siswa berdasarkan id databasennya
-$mhs = query("SELECT * FROM mahasiswa WHERE id = $id")[0];
-
 
 // cek apakah tombol submit sudah pernah di tekan atau belum
 if( isset( $_POST["submit"] ) ) {
 
-    // Cek apakah data berhasil di ubah atau tidak
-    if ( ubah($_POST) > 0 ) {
+    // Cek apakah data berhasil di tambahkan atau tidak
+    if ( tambah($_POST) > 0 ) {
         echo "
             <script>
-                alert('Data Berhasil diubah!');
+                alert('Data Berhasil Di tambahkan!');
                 document.location.href = 'index.php';
             </script>
         ";
     } else {
         echo "
             <script>
-                alert('Data Gagal diubah!');
+                alert('Data Gagal di tambahkan');
                 document.location.href = 'index.php';
             </script>
         ";
@@ -39,40 +34,39 @@ if( isset( $_POST["submit"] ) ) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubah Data Mahasiswa</title>
+    <title>Tambah Data Mahasiswa</title>
 </head>
 <body>
-    <h1>Ubah Data Mahasiswa</h1>
+    <h1>Tambah Data Mahasiswa</h1>
     <br>
-    <form action="" method="post">
-        <input type="hidden" name="id" value="<?= $mhs["id"]; ?>">
+    <form action="" method="post" enctype="multipart/form-data">
         <ul>
             <li>
                 <label for="nrp">NIM : </label>
-                <input type="text" name="nrp" id="nrp" require value="<?= $mhs["nrp"]; ?>">
+                <input type="text" name="nrp" id="nrp" require>
             </li>
             <li>
                 <label for="nama">NAMA : </label>
-                <input type="text" name="nama" id="nama" require value="<?= $mhs["nama"]; ?>">
+                <input type="text" name="nama" id="nama" require>
             </li>
             <li>
                 <label for="email">E-MAIL : </label>
-                <input type="text" name="email" id="email" require value="<?= $mhs["email"]; ?>">
+                <input type="text" name="email" id="email" require>
             </li>
             <li>
                 <label for="jurusan">JURUSAN : </label>
-                <input type="text" name="jurusan" id="jurusan" require value="<?= $mhs["jurusan"]; ?>">
+                <input type="text" name="jurusan" id="jurusan" require>
             </li>
             <li>
                 <label for="semester">SEMESTER : </label>
-                <input type="text" name="semester" id="semester" require value="<?= $mhs["semester"]; ?>">
+                <input type="text" name="semester" id="semester" require>
             </li>
             <li>
                 <label for="gambar">GAMBAR : </label>
-                <input type="text" name="gambar" id="gambar" require value="<?= $mhs["gambar"]; ?>">
+                <input type="file" name="gambar" id="gambar">
             </li>
             <li>
-                <button type="submit" name="submit">Ubah Data</button>
+                <button type="submit" name="submit">Tambah Data</button>
             </li>
         </ul>
     </form>

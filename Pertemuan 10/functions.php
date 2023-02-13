@@ -23,10 +23,11 @@ function tambah($data){
     $email = htmlspecialchars($data["email"]) ;
     $jurusan = htmlspecialchars($data["jurusan"]) ;
     $semester = htmlspecialchars($data["semester"]) ;
+    $gambar = htmlspecialchars($data["gambar"]) ;
 
     $query = "INSERT INTO mahasiswa 
                 VALUES
-            ('', '$nrp', '$nama', '$email', '$jurusan', '$semester')
+            ('', '$nrp', '$nama', '$email', '$jurusan', '$semester', '$gambar')
             ";
         mysqli_query($conn, $query);
 

@@ -23,7 +23,12 @@ function tambah($data){
     $email = htmlspecialchars($data["email"]) ;
     $jurusan = htmlspecialchars($data["jurusan"]) ;
     $semester = htmlspecialchars($data["semester"]) ;
-    $gambar = htmlspecialchars($data["gambar"]) ;
+
+    // Upload Gambar
+    $gambar = upload();
+    if ( !$gambar ){
+        return false;
+    }
 
     $query = "INSERT INTO mahasiswa 
                 VALUES
@@ -32,6 +37,55 @@ function tambah($data){
         mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
+}
+
+function upload(){
+    
+    $namafile = $_FILES["gambar"]["name"];
+    $ukuranfile = $_FILES["gambar"]["size"];
+    $error = $_FILES["gambar"]["error"];
+    $tmpName = $_FILES["gambar"]["tmp_name"];
+
+
+    // Cek apakah tidak ada gambar yg di upload
+    if ( $error === 4 ) {
+        echo "<script>
+                alert('Pilih Gambar terlebih dahulu!!')
+            </script>";
+        return false;
+    }
+
+    // Yang boleh di upload hanya file gambar
+    $ekstensiGambarValid = ['jpg', 'png', 'jpeg'];
+    $ekstensiGambar = explode('.', $namafile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if ( !in_array($ekstensiGambar, $ekstensiGambarValid) ) {
+        echo "<script>
+                alert('Yang anda upload bukan gambar!!')
+            </script>";
+        return false;
+    }
+
+    // Cek jika ukuran terlalu besar
+    if ( $ukuranfile > 1000000 ){
+        echo "<script>
+                alert('Ukuran gambar terlalu besar!!')
+            </script>";
+        return false;
+    }
+
+    // Lolos pengecekan gambar siap di upload ke folder
+    // Generate nama gambar baru
+
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+
+
+
+    move_uploaded_file($tmpName, 'img/'. $namaFileBaru);
+
+    return $namaFileBaru;
 }
 
 function hapus($id) {
@@ -48,7 +102,14 @@ function ubah($data) {
     $email = htmlspecialchars($data["email"]) ;
     $jurusan = htmlspecialchars($data["jurusan"]) ;
     $semester = htmlspecialchars($data["semester"]) ;
-    $gambar = htmlspecialchars($data["gambar"]) ;
+    $gambarLama = htmlspecialchars($data["gambarLama"]) ;
+
+    // cek apakah user upload gambar baru
+    if ( $_FILES['gambar']['error'] === 4 ) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+    }    
 
     $query = "UPDATE mahasiswa SET
                 nrp = '$nrp',

@@ -58,8 +58,8 @@ if( isset( $_POST["submit"] ) ) {
                 <input type="text" name="jurusan" id="jurusan" require>
             </li>
             <li>
-                <label for="semester">SEMESTER : </label>
-                <input type="text" name="semester" id="semester" require>
+                <label for="gambar">GAMBAR : </label>
+                <input type="text" name="gambar" id="gambar" require>
             </li>
             <li>
                 <button type="submit" name="submit">Tambah Data</button>

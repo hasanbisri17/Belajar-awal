@@ -39,4 +39,39 @@ function hapus($id) {
     return mysqli_affected_rows($conn);
 }
 
+function ubah($data) {
+    global $conn;
+    $id = $data["id"];
+    $nrp = htmlspecialchars($data["nrp"]);
+    $nama = htmlspecialchars($data["nama"]) ;
+    $email = htmlspecialchars($data["email"]) ;
+    $jurusan = htmlspecialchars($data["jurusan"]) ;
+    $semester = htmlspecialchars($data["semester"]) ;
+
+    $query = "UPDATE mahasiswa SET
+                nrp = '$nrp',
+                nama = '$nama',
+                email = '$email',
+                jurusan = '$jurusan',
+                semester = '$semester'
+                WHERE id = $id
+            ";
+        mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+
+}
+function cari($keyword){
+    global $conn;
+    $query = "SELECT * FROM mahasiswa
+                WHERE
+            nama LIKE '%$keyword%' OR 
+            nrp LIKE '%$keyword%' OR 
+            email LIKE '%$keyword%' OR 
+            jurusan LIKE '%$keyword%' OR 
+            semester LIKE '%$keyword%'
+            ";
+        return query($query);
+}
+
 ?>

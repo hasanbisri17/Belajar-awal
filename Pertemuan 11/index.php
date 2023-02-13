@@ -19,7 +19,9 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
     <button>
         <a href="tambah.php">Tambah Data Mahasiswa</a>
     </button>
-
+    <br/>
+    <br/>
+    <br/>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -36,7 +38,7 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
             <tr>
                 <td><?= $i ?></td>
                 <td>
-                    <a href="">Ubah</a> | 
+                    <a href="ubah.php?id=<?= $mhs["id"]; ?>">Ubah</a> | 
                     <a href="hapus.php?id=<?= $mhs["id"]; ?>" onclick="return confirm('yakin ingin menghapus data?');">Hapus</a>
                 </td>
                 <td><?= $mhs["nrp"]; ?></td>
